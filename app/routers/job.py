@@ -1,5 +1,6 @@
 from typing import List, Optional
 from fastapi import APIRouter, Depends, status
+from fastapi.param_functions import Query
 
 from ..schemas import schemas
 
@@ -22,8 +23,6 @@ def create_job(t: schemas.JobCreate, db: Session = Depends(get_db)):
 def update_job(t: schemas.JobUpdate, db: Session = Depends(get_db)):
     return crud_job.update_job(db, t)
 
-
-# /job?job_done=false
 @router.get('/', response_model=List[schemas.Job])
 def read_jobs(job_done: Optional[bool] = None, db: Session = Depends(get_db)):
     if job_done != None:
