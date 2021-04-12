@@ -33,6 +33,7 @@ def update_job(db: Session, job: schemas.JobUpdate):
     if job.employee_id != None:
         e = db.query(models.Employee).filter(models.Employee.id == job.employee_id).first()
         j.employee_id = e.id
+        
     if job.job_done != None:
         j.job_done = job.job_done
         if (job.job_done == False):

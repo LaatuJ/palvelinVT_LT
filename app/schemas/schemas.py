@@ -21,14 +21,11 @@ class Employee(CommonBase):
     pass
 
 class JobFull(Job):
-    employee_id: int
-    employee: Employee
+    employee: Optional[Employee] = None
 
 
 class EmployeeFull(Employee):
     job: Optional[Job] = None
-    class Config:
-        orm_mode = True
 
 
 class JobCreate(FirstCommonBase):
@@ -41,3 +38,5 @@ class JobUpdate(BaseModel):
     job_id: int
     employee_id: Optional[int] = None
     job_done: Optional[bool] = None
+    class Config:
+        orm_mode = True
